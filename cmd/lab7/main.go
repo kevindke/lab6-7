@@ -58,7 +58,6 @@ func main() {
 	router.GET("/query1", func(c *gin.Context) {
 		table := "<table class='table'><thead><tr>"
 		// put your query here
-<<<<<<< HEAD
 		rows, err := db.Query("SELECT o.name FROM owners o WHERE o.houseId IN (SELECT h.id FROM houses h WHERE h.price > 70000)") // <--- EDIT THIS LINE
 		if err != nil {
 			// careful about returning errors to the user!
@@ -92,9 +91,6 @@ func main() {
 		table := "<table class='table'><thead><tr>"
 		// put your query here
 		rows, err := db.Query("SELECT avg(o.salary) FROM owners o JOIN houses h ON o.houseId = h.id WHERE h.stories > 1") // <--- EDIT THIS LINE
-=======
-		rows, err := db.Query("SELECT * FROM table1") // <--- EDIT THIS LINE
->>>>>>> 1b7766c2871a687e73014132b61a6318338dc06b
 		if err != nil {
 			// careful about returning errors to the user!
 			c.AbortWithError(http.StatusInternalServerError, err)
@@ -110,7 +106,6 @@ func main() {
 		// once you've added all the columns in, close the header
 		table += "</thead><tbody>"
 		// declare all your RETURNED columns here
-<<<<<<< HEAD
 		var salary int      // <--- EDIT THESE LINES
 		// columns
 		for rows.Next() {
@@ -147,81 +142,12 @@ func main() {
 		for rows.Next() {
 			// rows.Scan() // put columns here prefaced with &
 			table += "<tr><td>" + strconv.Itoa(price) + "</td></tr>" // <--- EDIT THIS LINE
-=======
-		var id int      // <--- EDIT THESE LINES
-		var name string //<--- ^^^^
-		for rows.Next() {
-			// assign each of them, in order, to the parameters of rows.Scan.
-			// preface each variable with &
-			rows.Scan(&id, &name) // <--- EDIT THIS LINE
-			// can't combine ints and strings in Go. Use strconv.Itoa(int) instead
-			table += "<tr><td>" + strconv.Itoa(id) + "</td><td>" + name + "</td></tr>" // <--- EDIT THIS LINE
->>>>>>> 1b7766c2871a687e73014132b61a6318338dc06b
 		}
 		// finally, close out the body and table
 		table += "</tbody></table>"
 		c.Data(http.StatusOK, "text/html", []byte(table))
 	})
 
-<<<<<<< HEAD
-=======
-	router.GET("/query2", func(c *gin.Context) {
-		table := "<table class='table'><thead><tr>"
-		// put your query here
-		rows, err := db.Query("SELECT * FROM table1") // <--- EDIT THIS LINE
-		if err != nil {
-			// careful about returning errors to the user!
-			c.AbortWithError(http.StatusInternalServerError, err)
-		}
-		// foreach loop over rows.Columns, using value
-		cols, _ := rows.Columns()
-		if len(cols) == 0 {
-			c.AbortWithStatus(http.StatusNoContent)
-		}
-		for _, value := range cols {
-			table += "<th class='text-center'>" + value + "</th>"
-		}
-		// once you've added all the columns in, close the header
-		table += "</thead><tbody>"
-		// columns
-		for rows.Next() {
-			// rows.Scan() // put columns here prefaced with &
-			table += "<tr><td></td></tr>" // <--- EDIT THIS LINE
-		}
-		// finally, close out the body and table
-		table += "</tbody></table>"
-		c.Data(http.StatusOK, "text/html", []byte(table))
-	})
-
-	router.GET("/query3", func(c *gin.Context) {
-		table := "<table class='table'><thead><tr>"
-		// put your query here
-		rows, err := db.Query("SELECT * FROM table1") // <--- EDIT THIS LINE
-		if err != nil {
-			// careful about returning errors to the user!
-			c.AbortWithError(http.StatusInternalServerError, err)
-		}
-		// foreach loop over rows.Columns, using value
-		cols, _ := rows.Columns()
-		if len(cols) == 0 {
-			c.AbortWithStatus(http.StatusNoContent)
-		}
-		for _, value := range cols {
-			table += "<th class='text-center'>" + value + "</th>"
-		}
-		// once you've added all the columns in, close the header
-		table += "</thead><tbody>"
-		// columns
-		for rows.Next() {
-			// rows.Scan() // put columns here prefaced with &
-			table += "<tr><td></td></tr>" // <--- EDIT THIS LINE
-		}
-		// finally, close out the body and table
-		table += "</tbody></table>"
-		c.Data(http.StatusOK, "text/html", []byte(table))
-	})
-
->>>>>>> 1b7766c2871a687e73014132b61a6318338dc06b
 	// NO code should go after this line. it won't ever reach that point
 	router.Run(":" + port)
 }
