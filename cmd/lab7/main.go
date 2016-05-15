@@ -109,8 +109,9 @@ func main() {
 		var salary int      // <--- EDIT THESE LINES
 		// columns
 		for rows.Next() {
-			// rows.Scan() // put columns here prefaced with &
-			table += "<tr><td>" + salary + "</td></tr>" // <--- EDIT THIS LINE
+			//prefaced with &
+			rows.Scan(&salary) // <--- EDIT THIS LINE
+			table += "<tr><td>" + strconv.Itoa(salary) + "</td></tr>" // <--- EDIT THIS LINE
 		}
 		// finally, close out the body and table
 		table += "</tbody></table>"
@@ -140,8 +141,9 @@ func main() {
 		var price int      // <--- EDIT THESE LINES
 		// columns
 		for rows.Next() {
-			// rows.Scan() // put columns here prefaced with &
-			table += "<tr><td>" + price + "</td></tr>" // <--- EDIT THIS LINE
+			//prefaced with &
+			rows.Scan(&price) // <--- EDIT THIS LINE
+			table += "<tr><td>" + strconv.Itoa(price) + "</td></tr>" // <--- EDIT THIS LINE
 		}
 		// finally, close out the body and table
 		table += "</tbody></table>"
