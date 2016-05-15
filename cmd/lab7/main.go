@@ -107,7 +107,7 @@ func main() {
 		table += "</thead><tbody>"
 
 		// declare all your RETURNED columns here
-		var salary double      // <--- EDIT THESE LINES
+		var salary int      // <--- EDIT THESE LINES
 		// columns
 		for rows.Next() {
 			//prefaced with &
