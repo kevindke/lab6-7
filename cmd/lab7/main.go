@@ -90,7 +90,7 @@ func main() {
 	router.GET("/query2", func(c *gin.Context) {
 		table := "<table class='table'><thead><tr>"
 		// put your query here
-		rows, err := db.Query("SELECT avg(o.salary) FROM owners o JOIN houses h ON o.houseId = h.id WHERE h.stories > 1") // <--- EDIT THIS LINE
+		rows, err := db.Query("SELECT max(o.salary) FROM owners o JOIN houses h ON o.houseId = h.id WHERE h.stories > 1") // <--- EDIT THIS LINE
 		if err != nil {
 			// careful about returning errors to the user!
 			c.AbortWithError(http.StatusInternalServerError, err)
@@ -105,8 +105,9 @@ func main() {
 		}
 		// once you've added all the columns in, close the header
 		table += "</thead><tbody>"
+
 		// declare all your RETURNED columns here
-		var salary int      // <--- EDIT THESE LINES
+		var salary double      // <--- EDIT THESE LINES
 		// columns
 		for rows.Next() {
 			//prefaced with &
